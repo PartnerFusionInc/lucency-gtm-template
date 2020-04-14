@@ -15,5 +15,5 @@
 homepage: "https://www.lucency.com"
 documentation: "https://www.lucency.com/"
 versions:
-  - sha: 5f02a788b90ae804f86b04aa24af8937e567874a
+  - sha: b93cb10b4de1dd68160e1e4962083889d48ff0f8
     changeNotes: Initial Version
