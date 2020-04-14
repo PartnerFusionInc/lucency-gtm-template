@@ -1,2 +1,3 @@
-# lucency-gtm-template
-Lucency Template for Google Tag Manager
+# Lucency Template for GTM
+
+The GTM template for the Lucency call tracking javascript SDK. See https://lucency.com for more information.
