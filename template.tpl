@@ -33,13 +33,72 @@ ___TEMPLATE_PARAMETERS___
     "type": "TEXT",
     "name": "apiToken",
     "displayName": "API Token",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "The Lucency API Token for use with this implementation"
   },
   {
     "type": "TEXT",
     "name": "campaignId",
     "displayName": "Campaign ID",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "The Lucency Campaign ID for use with this implementation"
+  },
+  {
+    "type": "GROUP",
+    "name": "group1",
+    "displayName": "Custom Variables",
+    "groupStyle": "ZIPPY_OPEN",
+    "subParams": [
+      {
+        "type": "PARAM_TABLE",
+        "name": "customVariableTable",
+        "displayName": "Variable Definitions",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "customVariable",
+              "displayName": "Variable",
+              "simpleValueType": true,
+              "help": "The variable value you\u0027d like to track"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "customVariableKey",
+              "displayName": "Lucency Key",
+              "simpleValueType": true,
+              "help": "The key you\u0027d like to associate this with in Lucency",
+              "canBeEmptyString": false
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "matchingPage",
+              "displayName": "Page Match",
+              "simpleValueType": true,
+              "help": "Collect this variables on pages matching this entry. If the value is a regular expression, select \u0027Is Regex\u0027.\n\nIf this value is blank or \u0027*\u0027, the variable will be collected whenever the tag fires.",
+              "canBeEmptyString": true
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "CHECKBOX",
+              "name": "matchIsRegex",
+              "checkboxText": "Is Regex",
+              "simpleValueType": true,
+              "help": "Select this if the page matching value is a regular expression"
+            },
+            "isUnique": false
+          }
+        ]
+      }
+    ]
   }
 ]
 
@@ -48,11 +107,29 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 //Lucency GTM Tag Template - https://lucency.com
 
-//const log = require('logToConsole');
+const log = require('logToConsole');
 const injectScript = require('injectScript');
 
 const setInWindow = require('setInWindow');
 const callInWindow = require('callInWindow');
+const getUrl = require('getUrl');
+
+
+
+function matchPage(url, match, isRegex) {
+  if (match == "" || match == "*") {
+    return true;
+  }
+  if (isRegex) {
+    let matched = url.match(match);
+    return (matched != null && matched != [""]);
+  } else {
+    return (url.indexOf(match) !== -1);
+  }
+}
+  log(data.customVariableTable);
+
+
 
 //Set the appropriate vars on the window
 setInWindow("LucencyLoaderObject", "lucency", true);
@@ -66,8 +143,33 @@ function postInject() {
   //Authenticate
   callInWindow('lucency', 'token', apiToken); 
   
+  //get the full page URL
+  let pageUrl = getUrl("");
+  log("pageUrl is" + pageUrl);
+  
+  
+  let customVariables = data.customVariableTable;
+  let writeData = {};
+  for (let i = 0; i < customVariables.length; i++) {
+    
+    let variableData = customVariables[i];
+    let matchingPage = variableData.matchingPage;
+    let customVariable = variableData.customVariable;
+    let customVariableKey = variableData.customVariableKey;
+    let isRegex = variableData.matchIsRegex;
+    let matchedPage = matchPage(pageUrl, matchingPage, isRegex);
+    log("matched page ? " + matchedPage);
+    if (matchedPage) {
+      writeData[customVariableKey] = customVariable;
+    }
+
+    log(variableData);
+  }
+  log(writeData);
+  
+   
   //Write the session
-  callInWindow('lucency', "write", {}, campaignId);
+  callInWindow('lucency', "write", writeData, campaignId);
   
   //Tell GTM it worked
   data.gtmOnSuccess();
@@ -206,6 +308,49 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "logging",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "environments",
+          "value": {
+            "type": 1,
+            "string": "debug"
+          }
+        }
+      ]
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "get_url",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "urlParts",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        },
+        {
+          "key": "queriesAllowed",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        }
+      ]
+    },
+    "isRequired": true
   }
 ]
 
@@ -217,6 +362,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/14/2020, 12:55:07 PM
+Created on 4/16/2020, 2:59:40 PM
 
 
