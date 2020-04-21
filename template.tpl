@@ -45,6 +45,84 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
+    "name": "lucencyVariables",
+    "displayName": "Lucency Supported Variables",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "GROUP",
+        "name": "Standard",
+        "displayName": "Standard",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "TEXT",
+            "name": "brand",
+            "displayName": "Brand",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "device_type",
+            "displayName": "Device Type",
+            "simpleValueType": true
+          }
+        ]
+      },
+      {
+        "type": "GROUP",
+        "name": "Conversion",
+        "displayName": "Conversion",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "TEXT",
+            "name": "revenue",
+            "displayName": "Revenue",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "currency_code",
+            "displayName": "Currency Code",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "type",
+            "displayName": "Conversion Type",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "tax",
+            "displayName": "Tax",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "transactionId",
+            "displayName": "Transaction ID",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "shipping",
+            "displayName": "Shipping",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "products",
+            "displayName": "Products",
+            "simpleValueType": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
     "name": "group1",
     "displayName": "Custom Variables",
     "groupStyle": "ZIPPY_OPEN",
@@ -99,6 +177,195 @@ ___TEMPLATE_PARAMETERS___
         ]
       }
     ]
+  },
+  {
+    "type": "GROUP",
+    "name": "utmGroup",
+    "displayName": "Analytics Variables",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "LABEL",
+        "name": "analyticsLabel",
+        "displayName": "Select the variables you\u0027d like to track. If you do not define the value, Lucency will attempt to collect the variable from the current page URL and referrer URL query parameters."
+      },
+      {
+        "type": "GROUP",
+        "name": "googleAnalytics",
+        "displayName": "Google Analytics",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "utm_term_checkbox",
+            "checkboxText": "utm_term",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "utm_term",
+            "displayName": "utm_term",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "utm_term_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "utm_campaign_checkbox",
+            "checkboxText": "utm_campaign",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "utm_campaign",
+            "displayName": "utm_campaign",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "utm_campaign_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "utm_source_checkbox",
+            "checkboxText": "utm_source",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "utm_source",
+            "displayName": "utm_source",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "utm_source_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "utm_medium_checkbox",
+            "checkboxText": "utm_medium",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "utm_medium",
+            "displayName": "utm_medium",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "utm_medium_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "utm_content_checkbox",
+            "checkboxText": "utm_content",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "utm_content",
+            "displayName": "utm_content",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "utm_content_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "GROUP",
+        "name": "adobeAnalytics",
+        "displayName": "Adobe Analytics",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "aam_uuid_checkbox",
+            "checkboxText": "aam_uuid",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "aam_uuid",
+            "displayName": "aam_uuid",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "aam_uuid_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "mcid_checkbox",
+            "checkboxText": "mcid",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "mcid",
+            "displayName": "mc_id",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "mcid_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "GROUP",
+        "name": "microsoftAnalytics",
+        "displayName": "Microsoft",
+        "groupStyle": "ZIPPY_CLOSED",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "msclkid_checkbox",
+            "checkboxText": "msclkid",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "msclkid",
+            "displayName": "msclkid",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "msclkid_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
 
@@ -106,14 +373,39 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 //Lucency GTM Tag Template - https://lucency.com
-
 const log = require('logToConsole');
 const injectScript = require('injectScript');
 
 const setInWindow = require('setInWindow');
 const callInWindow = require('callInWindow');
 const getUrl = require('getUrl');
+const getQueryParameters = require('getQueryParameters');
+const getReferrerQueryParameters = require('getReferrerQueryParameters');
 
+
+//Attempt to collect undefined analytics variables from query parameters
+function getQueryParam(param) {
+  let queryParam = getQueryParameters(param) || getReferrerQueryParameters(param);
+  return queryParam;
+}
+function getVariableData() {
+  let d = {};
+  if (data.brand) { d.brand = data.brand; }
+  if (data.device_type) { d.device_type = data.device_type; }
+  
+  d.device_type = data.device_type;
+  if (!data.utm_term_checkbox) { d.utm_term = 'fred2'; }
+  //d.utm_term = getQueryParam('utm_term');}
+  if (!data.utm_campaign_checkbox) { d.utm_campaign = getQueryParam('utm_campaign');}
+  if (!data.utm_source_checkbox) { d.utm_source = getQueryParam('utm_source');}
+  if (!data.utm_medium_checkbox) { d.utm_medium = getQueryParam('utm_medium');}
+  if (!data.utm_content_checkbox) { d.utm_content = getQueryParam('utm_content');}
+  if (!data.aam_uuid_checkbox) { d.aam_uuid = getQueryParam('aam_uuid'); }
+  if (!data.mcid_checkbox) { d.mcid = getQueryParam('mcid'); }
+  if (!data.msclkid) { d.msclkid = getQueryParam('msclkid'); }
+  log(d);
+  return d;
+}
 
 
 function matchPage(url, match, isRegex) {
@@ -127,7 +419,6 @@ function matchPage(url, match, isRegex) {
     return (url.indexOf(match) !== -1);
   }
 }
-  log(data.customVariableTable);
 
 
 
@@ -136,7 +427,11 @@ setInWindow("LucencyLoaderObject", "lucency", true);
 setInWindow("lucency", {}, true);
 
 function postInject() {
-
+  
+  let writeData = {};
+  writeData = getVariableData();
+  
+  
   const apiToken = data.apiToken;
   const campaignId = data.campaignId;
   
@@ -146,10 +441,9 @@ function postInject() {
   //get the full page URL
   let pageUrl = getUrl("");
   log("pageUrl is" + pageUrl);
-  
-  
-  let customVariables = data.customVariableTable;
-  let writeData = {};
+    
+  //check there are any customvariables;
+  let customVariables = data.customVariableTable || [];
   for (let i = 0; i < customVariables.length; i++) {
     
     let variableData = customVariables[i];
@@ -163,9 +457,10 @@ function postInject() {
       writeData[customVariableKey] = customVariable;
     }
 
-    log(variableData);
+    log('variabledata is ', variableData);
   }
-  log(writeData);
+  
+  log("data to write is ", writeData);
   
    
   //Write the session
@@ -174,6 +469,9 @@ function postInject() {
   //Tell GTM it worked
   data.gtmOnSuccess();
 }
+
+//let analyticsData = getAnalyticsParameters();
+//log('analyticsData is ', analyticsData);
 
 //Inject the lucency JS SDK code and write the session
 const url = 'https://cdn.lucency.com/lucency.js';
@@ -320,7 +618,35 @@ ___WEB_PERMISSIONS___
           "key": "environments",
           "value": {
             "type": 1,
-            "string": "debug"
+            "string": "all"
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "get_url",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "urlParts",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        },
+        {
+          "key": "queriesAllowed",
+          "value": {
+            "type": 1,
+            "string": "any"
           }
         }
       ]
@@ -330,7 +656,7 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
-        "publicId": "get_url",
+        "publicId": "get_referrer",
         "versionId": "1"
       },
       "param": [
@@ -362,6 +688,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/16/2020, 2:59:40 PM
+Created on 4/21/2020, 1:10:34 PM
 
 
