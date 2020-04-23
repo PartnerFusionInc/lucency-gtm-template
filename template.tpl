@@ -44,6 +44,13 @@ ___TEMPLATE_PARAMETERS___
     "help": "The Lucency Campaign ID for use with this implementation"
   },
   {
+    "type": "TEXT",
+    "name": "phoneNumberClass",
+    "displayName": "Phone Number Class Name",
+    "simpleValueType": true,
+    "help": "This is the HTML class of the elements where you\u0027d like to overwrite their content with the phone number returned from Lucency. \n\nFor every element with this class name, it changes the inner text to the phone number. for any \u003ca\u003e tags, it also sets the href to the phone number."
+  },
+  {
     "type": "GROUP",
     "name": "lucencyVariables",
     "displayName": "Lucency Supported Variables",
@@ -464,7 +471,7 @@ function postInject() {
   
    
   //Write the session
-  callInWindow('lucency', "write", writeData, campaignId);
+  callInWindow("lucency", "write_and_apply", writeData, campaignId, data.phoneNumberClass);
   
   //Tell GTM it worked
   data.gtmOnSuccess();
@@ -472,6 +479,7 @@ function postInject() {
 
 //let analyticsData = getAnalyticsParameters();
 //log('analyticsData is ', analyticsData);
+
 
 //Inject the lucency JS SDK code and write the session
 const url = 'https://cdn.lucency.com/lucency.js';
@@ -688,6 +696,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/21/2020, 1:10:34 PM
+Created on 4/23/2020, 10:11:02 AM
 
 
