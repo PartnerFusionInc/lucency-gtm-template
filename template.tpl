@@ -14,6 +14,7 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Lucency",
+  "categories": ["ATTRIBUTION", "ANALYTICS", "CONVERSIONS"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -389,12 +390,13 @@ const getUrl = require('getUrl');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerQueryParameters = require('getReferrerQueryParameters');
 
-
 //Attempt to collect undefined analytics variables from query parameters
 function getQueryParam(param) {
   let queryParam = getQueryParameters(param) || getReferrerQueryParameters(param);
   return queryParam;
 }
+
+//Get standard/analytics variable data
 function getVariableData() {
   let d = {};
   if (data.brand) { d.brand = data.brand; }
@@ -414,7 +416,6 @@ function getVariableData() {
   return d;
 }
 
-
 function matchPage(url, match, isRegex) {
   if (match == "" || match == "*") {
     return true;
@@ -428,16 +429,11 @@ function matchPage(url, match, isRegex) {
 }
 
 
-
-//Set the appropriate vars on the window
-setInWindow("LucencyLoaderObject", "lucency", true);
-setInWindow("lucency", {}, true);
-
 function postInject() {
   
+  //set initial write data to non-custom vars
   let writeData = {};
   writeData = getVariableData();
-  
   
   const apiToken = data.apiToken;
   const campaignId = data.campaignId;
@@ -477,11 +473,11 @@ function postInject() {
   data.gtmOnSuccess();
 }
 
-//let analyticsData = getAnalyticsParameters();
-//log('analyticsData is ', analyticsData);
+//Set the appropriate vars on the window
+setInWindow("LucencyLoaderObject", "lucency", true);
+setInWindow("lucency", {}, true);
 
-
-//Inject the lucency JS SDK code and write the session
+//Inject the lucency JS SDK code and write the session in postInject callback
 const url = 'https://cdn.lucency.com/lucency.js';
 injectScript(url, postInject, data.gtmOnFailure, url);
 
@@ -696,6 +692,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/23/2020, 10:11:02 AM
+Created on 4/23/2020, 11:16:54 AM
 
 
