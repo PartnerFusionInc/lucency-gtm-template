@@ -297,6 +297,25 @@ ___TEMPLATE_PARAMETERS___
                 "type": "EQUALS"
               }
             ]
+          },
+          {
+            "type": "TEXT",
+            "name": "gclid",
+            "displayName": "gclid",
+            "simpleValueType": true,
+            "enablingConditions": [
+              {
+                "paramName": "gclid_checkbox",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "gclid_checkbox",
+            "checkboxText": "gclid",
+            "simpleValueType": true
           }
         ]
       },
@@ -416,6 +435,8 @@ function getVariableData() {
   if (!data.utm_source_checkbox) { d.utm_source = getQueryParam('utm_source');}
   if (!data.utm_medium_checkbox) { d.utm_medium = getQueryParam('utm_medium');}
   if (!data.utm_content_checkbox) { d.utm_content = getQueryParam('utm_content');}
+  if (!data.gclid_checkbox) { d.gclid = getQueryParam('gclid');}
+
   if (!data.aam_uuid_checkbox) { d.aam_uuid = getQueryParam('aam_uuid'); }
   if (!data.mcid_checkbox) { d.mcid = getQueryParam('mcid'); }
   if (!data.msclkid) { d.msclkid = getQueryParam('msclkid'); }
@@ -629,7 +650,7 @@ ___WEB_PERMISSIONS___
           "key": "environments",
           "value": {
             "type": 1,
-            "string": "all"
+            "string": "debug"
           }
         }
       ]
@@ -699,6 +720,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/27/2020, 2:39:45 PM
+Created on 4/27/2020, 3:22:10 PM
 
 
