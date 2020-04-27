@@ -399,12 +399,19 @@ function getQueryParam(param) {
 //Get standard/analytics variable data
 function getVariableData() {
   let d = {};
+  //lucency supported
   if (data.brand) { d.brand = data.brand; }
   if (data.device_type) { d.device_type = data.device_type; }
+  if (data.revenue) { d.revenue = data.revenue; }
+  if (data.currency_code) { d.currency_code = data.currency_code; }
+  if (data.type) { d.type = data.type; }
+  if (data.tax) { d.tax = data.tax; }
+  if (data.transactionId) { d.transactionId = data.transactionId; }
+  if (data.shipping) { d.shipping = data.shipping; }
+  if (data.products) { d.products = data.products; }
   
-  d.device_type = data.device_type;
-  if (!data.utm_term_checkbox) { d.utm_term = 'fred2'; }
-  //d.utm_term = getQueryParam('utm_term');}
+  //analytics vars
+  if (!data.utm_term_checkbox) { d.utm_term = getQueryParam('utm_term');}
   if (!data.utm_campaign_checkbox) { d.utm_campaign = getQueryParam('utm_campaign');}
   if (!data.utm_source_checkbox) { d.utm_source = getQueryParam('utm_source');}
   if (!data.utm_medium_checkbox) { d.utm_medium = getQueryParam('utm_medium');}
@@ -692,6 +699,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 4/23/2020, 11:16:54 AM
+Created on 4/27/2020, 2:39:45 PM
 
 
