@@ -14,6 +14,7 @@
 
 homepage: "https://www.lucency.com"
 documentation: "https://www.lucency.com/"
+documentation: "https://github.com/PartnerFusionInc/lucency-gtm-template/wiki/Lucency-GTM-Documentation"
 versions:
   - sha: 7f1b0f062dbda53ce55b8e5e2dd7db76e38b95c2
     changeNotes: Initial Version
