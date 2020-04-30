@@ -1,0 +1,20 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+homepage: "https://www.lucency.com"
+documentation: "https://www.lucency.com/"
+documentation: "https://github.com/PartnerFusionInc/lucency-gtm-template/wiki/Lucency-GTM-Documentation"
+versions:
+  - sha: 2083b5ed0a93a42cb9718f5d24d0d66ce30b6152
+    changeNotes: Initial Version
