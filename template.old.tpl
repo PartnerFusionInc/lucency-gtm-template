@@ -299,12 +299,6 @@ ___TEMPLATE_PARAMETERS___
             ]
           },
           {
-            "type": "CHECKBOX",
-            "name": "gclid_checkbox",
-            "checkboxText": "gclid",
-            "simpleValueType": true
-          },
-          {
             "type": "TEXT",
             "name": "gclid",
             "displayName": "gclid",
@@ -316,6 +310,12 @@ ___TEMPLATE_PARAMETERS___
                 "type": "EQUALS"
               }
             ]
+          },
+          {
+            "type": "CHECKBOX",
+            "name": "gclid_checkbox",
+            "checkboxText": "gclid",
+            "simpleValueType": true
           }
         ]
       },
@@ -410,55 +410,36 @@ const getQueryParameters = require('getQueryParameters');
 const getReferrerQueryParameters = require('getReferrerQueryParameters');
 
 //Attempt to collect undefined analytics variables from query parameters
-function getValueOrQueryParam(param) {
-  if (data[param] && data[param] != '') {
-    return data[param];
-  } else {
-    let queryParam = getQueryParameters(param) || getReferrerQueryParameters(param);      
-    return queryParam;
-  }
+function getQueryParam(param) {
+  let queryParam = getQueryParameters(param) || getReferrerQueryParameters(param);
+  return queryParam;
 }
 
 //Get standard/analytics variable data
 function getVariableData() {
-  //log('-------------');
-  let d = {online: {}};
-  //lucency supported general
-  if (data.brand) { d.online.brand = data.brand; }
-  if (data.device_type) { d.online.device_type = data.device_type; }
-  
-  //lucency supported conversion
-  
-  if (
-    data.revenue || 
-    data.currency_code || 
-    data.type || 
-    data.tax || 
-    data.transactionId || 
-    data.shipping || 
-    data.products
-  ) {
-    d.conversion = [{}];
-    if (data.revenue) { d.conversion[0].revenue = data.revenue; }
-    if (data.currency_code) { d.conversion[0].currency_code = data.currency_code; }
-    if (data.type) { d.conversion[0].type = data.type; }
-    if (data.tax) { d.conversion[0].tax = data.tax; }
-    if (data.transactionId) { d.conversion[0].transactionId = data.transactionId; }
-    if (data.shipping) { d.conversion[0].shipping = data.shipping; }
-    if (data.products) { d.conversion[0].products = data.products; }
-  }
+  let d = {};
+  //lucency supported
+  if (data.brand) { d.brand = data.brand; }
+  if (data.device_type) { d.device_type = data.device_type; }
+  if (data.revenue) { d.revenue = data.revenue; }
+  if (data.currency_code) { d.currency_code = data.currency_code; }
+  if (data.type) { d.type = data.type; }
+  if (data.tax) { d.tax = data.tax; }
+  if (data.transactionId) { d.transactionId = data.transactionId; }
+  if (data.shipping) { d.shipping = data.shipping; }
+  if (data.products) { d.products = data.products; }
   
   //analytics vars
-  if (data.utm_term_checkbox) { d.online.utm_term = getValueOrQueryParam('utm_term');}
-  if (data.utm_campaign_checkbox) { d.online.utm_campaign = getValueOrQueryParam('utm_campaign');}
-  if (data.utm_source_checkbox) { d.online.utm_source = getValueOrQueryParam('utm_source');}
-  if (data.utm_medium_checkbox) { d.online.utm_medium = getValueOrQueryParam('utm_medium');}
-  if (data.utm_content_checkbox) { d.online.utm_content = getValueOrQueryParam('utm_content');}
-  if (data.gclid_checkbox) { d.online.gclid = getValueOrQueryParam('gclid');}
+  if (!data.utm_term_checkbox) { d.utm_term = getQueryParam('utm_term');}
+  if (!data.utm_campaign_checkbox) { d.utm_campaign = getQueryParam('utm_campaign');}
+  if (!data.utm_source_checkbox) { d.utm_source = getQueryParam('utm_source');}
+  if (!data.utm_medium_checkbox) { d.utm_medium = getQueryParam('utm_medium');}
+  if (!data.utm_content_checkbox) { d.utm_content = getQueryParam('utm_content');}
+  if (!data.gclid_checkbox) { d.gclid = getQueryParam('gclid');}
 
-  if (data.aam_uuid_checkbox) { d.online.aam_uuid = getValueOrQueryParam('aam_uuid'); }
-  if (data.mcid_checkbox) { d.online.mcid = getValueOrQueryParam('mcid'); }
-  if (data.msclkid) { d.online.msclkid = getValueOrQueryParam('msclkid'); }
+  if (!data.aam_uuid_checkbox) { d.aam_uuid = getQueryParam('aam_uuid'); }
+  if (!data.mcid_checkbox) { d.mcid = getQueryParam('mcid'); }
+  if (!data.msclkid) { d.msclkid = getQueryParam('msclkid'); }
   log(d);
   return d;
 }
@@ -477,7 +458,6 @@ function matchPage(url, match, isRegex) {
 
 
 function postInject() {
-  log('called post inject');
   
   //set initial write data to non-custom vars
   let writeData = {};
@@ -508,10 +488,10 @@ function postInject() {
       writeData[customVariableKey] = customVariable;
     }
 
-    //log('variabledata is ', variableData);
+    log('variabledata is ', variableData);
   }
   
-  //log("data to write is ", writeData);
+  log("data to write is ", writeData);
   
    
   //Write the session
@@ -520,7 +500,6 @@ function postInject() {
   //Tell GTM it worked
   data.gtmOnSuccess();
 }
-
 
 //Set the appropriate vars on the window
 setInWindow("LucencyLoaderObject", "lucency", true);
@@ -741,6 +720,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 6/1/2020, 4:09:16 PM
+Created on 4/27/2020, 3:22:10 PM
 
 
